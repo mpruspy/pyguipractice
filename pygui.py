@@ -1,17 +1,21 @@
 import PySimpleGUI as sg
+import functions
 
-comprimir = sg.Text("Seleccione los archivos a comprimir")
-destino = sg.Text("Seleccione carpeta de destino")
-input_box1 = sg.Input()
-input_box2 = sg.Input()
-elegir_archivo = sg.FileBrowse("Seleccionar")
-elegir_carpeta = sg.FolderBrowse("Seleccionar")
-ejecutar = sg.Button("COMPRIMIR")
+titulo = sg.Text("Lista de tareas")
+input_box1 = sg.InputText(tooltip="Ingresa una tareita", key="todo")
+agregar = sg.Button("Add")
 
 
 window = sg.Window("File zipper",
-                   layout=[[comprimir, input_box1, elegir_archivo],
-                           [destino, input_box2, elegir_carpeta],
-                           [ejecutar]])
-window.read()
+                   layout=[[titulo],[input_box1, agregar]],
+                   font=("Helvetica", 20))
+while True:
+    event, values = window.read()
+    print(values)
+    match event:
+        case "Add":
+            functions.imprimir(event)
+        case sg.WIN_CLOSED:
+            break
+
 window.close()
